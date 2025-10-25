@@ -18,11 +18,15 @@
 
         // grabing url from browser navbar
         grab.addEventListener('click',()=>{
-             let currentURL = window.location.href;
-                input.value=currentURL;
-        }
-    )
+        //    it will only work in extension environment
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        let currentURL = tabs[0].url; 
+        input.value = currentURL;
+        console.log(currentURL);
+    });
+});
 
+    
 
         clear.addEventListener('click',()=>{
              if (inputValue.length !== 0)
