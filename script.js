@@ -51,17 +51,30 @@
             
         })
 
-        function display(){
-        if (unorder.textContent.length !==0) {
-            unorder.innerHTML='';
-        }
-            
-            inputValue.forEach((element,index)=>{
-                let disli= `<li><a href='${element}'>${element}</a> <button class='remove lightgreen' onclick='remove(${index})'>remove</button></li>`
-               
-                unorder.innerHTML+=disli;
-            })
-        }
+        function display() {
+    unorder.innerHTML = '';
+
+    inputValue.forEach((element, index) => {
+        let disli = document.createElement('li');
+
+        let link = document.createElement('a');
+        link.href = element;
+        link.textContent = element;
+        link.target = "_blank"; // open in new tab
+        disli.appendChild(link);
+
+        let btn = document.createElement('button');
+        btn.textContent = 'Remove';
+        btn.className = 'remove lightgreen';
+        btn.addEventListener('click', () => {
+            remove(index);
+        });
+        disli.appendChild(btn);
+
+        unorder.appendChild(disli);
+    });
+}
+
 
         function remove(i){
             inputValue.splice(i,1)
